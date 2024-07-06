@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # TODOS: 
 # on_delete functionality
@@ -15,11 +16,11 @@ class Trip(models.Model):
 class Bag(models.Model):
 
     bag_name = models.CharField(max_length=100)
-    dimension_x = models.DecimalField(max_digits=2)
-    dimension_y = models.DecimalField(max_digits=2)
-    dimension_z = models.DecimalField(max_digits=2)
+    dimension_x = models.DecimalField(max_digits=5, decimal_places=2)
+    dimension_y = models.DecimalField(max_digits=5, decimal_places=2)
+    dimension_z = models.DecimalField(max_digits=5, decimal_places=2)
 
-    traveler = models.ForeignKey(User)
+    traveler = models.ForeignKey(User, on_delete=models.CASCADE)
     trips = models.ManyToManyField(Trip)
     
     def __str__(self):
@@ -29,28 +30,20 @@ class Bag(models.Model):
 class Compartment(models.Model):
 
     compartment_name = models.CharField(max_length=100)
-    dimension_x = models.DecimalField(max_digits=2)
-    dimension_y = models.DecimalField(max_digits=2)
-    dimension_z = models.DecimalField(max_digits=2)
+    dimension_x = models.DecimalField(max_digits=5, decimal_places=2)
+    dimension_y = models.DecimalField(max_digits=5, decimal_places=2)
+    dimension_z = models.DecimalField(max_digits=5, decimal_places=2)
 
-    bag = models.ForeignKey(Bag)
+    bag = models.ForeignKey(Bag, on_delete=models.CASCADE)
     
     def __str__(self):
-        return self.bag_name
+        return self.bag.bag_name
 
 class Item(models.Model):
 
     item_name = models.CharField(max_length=100)
-    weight = models.DecimalField(max_digits=2)
-    dimension_x = models.DecimalField(max_digits=2)
-    dimension_y = models.DecimalField(max_digits=2)
-    dimension_z = models.DecimalField(max_digits=2)
-
-class Activity(models.Model):
-    SKIING = 'skiing'
-    MTB = 'mountain_biking'
-    GOLF = 'golf'
-    FISHING = 'fishing'
-    ACTIVITIES = [SKIING,MTB,GOLF,FISHING]
-    activity_name = models.CharField(choices=ACTIVITIES)
+    weight = models.DecimalField(max_digits=5, decimal_places=2)
+    dimension_x = models.DecimalField(max_digits=5, decimal_places=2)
+    dimension_y = models.DecimalField(max_digits=5, decimal_places=2)
+    dimension_z = models.DecimalField(max_digits=5, decimal_places=2)
 
