@@ -1,5 +1,5 @@
 from django.test import TestCase
-from .models import Trip, Bag, Compartment, Item
+from .models import Trip, Bag, Item
 from django.contrib.auth.models import User
 
 # Create your tests here.
