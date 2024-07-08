@@ -26,22 +26,9 @@ class Bag(models.Model):
     def __str__(self):
         return self.bag_name
 
-
-class Compartment(models.Model):
-
-    compartment_name = models.CharField(max_length=100)
-    dimension_x = models.FloatField()
-    dimension_y = models.FloatField()
-    dimension_z = models.FloatField()
-
-    bag = models.ForeignKey(Bag, on_delete=models.CASCADE)
-    
-    def __str__(self):
-        return f"{self.bag.bag_name}: {self.compartment_name}"
-
 class Item(models.Model):
 
-    compartments = models.ManyToManyField(Compartment)
+    bags = models.ManyToManyField(Bag)
     item_name = models.CharField(max_length=100)
     weight = models.FloatField()
     dimension_x = models.FloatField()
