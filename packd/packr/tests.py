@@ -7,14 +7,13 @@ from django.contrib.auth.models import User
 class TripModelTests(TestCase):
 
 	def test_valid_trip(self):
+		# TODO: how can I do this better? A mock perhaps? 
 		user = User()
 		name = 'Test Trip'
 		trip = Trip(traveler=user, trip_name=name)
 
 		assert trip.trip_name == name
 		assert trip.traveler.id == user.id
-
-	def test_valid_bag(self):
 
 
 

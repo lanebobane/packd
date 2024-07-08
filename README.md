@@ -10,9 +10,10 @@ Coming soon.
 
 ## Todos (not prioritized)
 
-1. Add 'bag total weight' calculation. 
-2. List bag contents
-3. List bags for Trip. 
+* Add association between items and compartments (and associated validation)
+* Add 'bag total weight' calculation. 
+* List bag contents
+* List bags for Trip. 
 
 ## Future functionality
 

@@ -16,9 +16,9 @@ class Trip(models.Model):
 class Bag(models.Model):
 
     bag_name = models.CharField(max_length=100)
-    dimension_x = models.DecimalField(max_digits=5, decimal_places=2)
-    dimension_y = models.DecimalField(max_digits=5, decimal_places=2)
-    dimension_z = models.DecimalField(max_digits=5, decimal_places=2)
+    dimension_x = models.FloatField()
+    dimension_y = models.FloatField()
+    dimension_z = models.FloatField()
 
     traveler = models.ForeignKey(User, on_delete=models.CASCADE)
     trips = models.ManyToManyField(Trip)
@@ -30,20 +30,24 @@ class Bag(models.Model):
 class Compartment(models.Model):
 
     compartment_name = models.CharField(max_length=100)
-    dimension_x = models.DecimalField(max_digits=5, decimal_places=2)
-    dimension_y = models.DecimalField(max_digits=5, decimal_places=2)
-    dimension_z = models.DecimalField(max_digits=5, decimal_places=2)
+    dimension_x = models.FloatField()
+    dimension_y = models.FloatField()
+    dimension_z = models.FloatField()
 
     bag = models.ForeignKey(Bag, on_delete=models.CASCADE)
     
     def __str__(self):
-        return self.bag.bag_name
+        return f"{self.bag.bag_name}: {self.compartment_name}"
 
 class Item(models.Model):
 
+    compartments = models.ManyToManyField(Compartment)
     item_name = models.CharField(max_length=100)
-    weight = models.DecimalField(max_digits=5, decimal_places=2)
-    dimension_x = models.DecimalField(max_digits=5, decimal_places=2)
-    dimension_y = models.DecimalField(max_digits=5, decimal_places=2)
-    dimension_z = models.DecimalField(max_digits=5, decimal_places=2)
+    weight = models.FloatField()
+    dimension_x = models.FloatField()
+    dimension_y = models.FloatField()
+    dimension_z = models.FloatField()
+
+    def __str__(self):
+        return self.item_name
 
