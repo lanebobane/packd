@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Trip, Bag, Item
+from .models import Item, Pack
 
 
 admin.site.site_header = 'Packd Header Placeholder'
@@ -8,6 +8,5 @@ admin.site.index_title = 'Packd Index Title Placeholder'
 
 
 # Register your models here.
-admin.site.register(Trip)
-admin.site.register(Bag)
+admin.site.register(Pack)
 admin.site.register(Item)
