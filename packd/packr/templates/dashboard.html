@@ -1,6 +1,6 @@
+{% extends 'base.html' %}
 {% block content %}
 <div>My Packing Dashboard</div>
-
 
 <h2>Items</h2>
 {% for item in packing_items %}
@@ -9,6 +9,7 @@
     <div>Y: {{item.dimension_y}}"</div>
     <div>Z: {{item.dimension_z}}"</div>
     <div>Weight: {{item.weight}} lbs.</div>
+    <br>
 {% endfor %}
 
 <h2>Bags</h2>
@@ -18,6 +19,14 @@
     <div class="text-green-500">Y: {{item.dimension_y}}"</div>
     <div class="text-green-500">Z: {{item.dimension_z}}"</div>
     <div class="text-green-500">Weight: {{item.weight}} lbs.</div>
+    <br>
+{% endfor %}
+
+<h2>Packs</h2>
+{% for pack in packs %}
+    <div class="font-bold text-gray-700">{{pack.name}}</div>
+    <div class="text-green-500">Bag: {{pack.bag}}</div>
+    <br>
 {% endfor %}
 
 {% endblock %}

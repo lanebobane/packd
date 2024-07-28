@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Add Item/Bag</h1>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div>
+        <label for="">Item Name</label>
+        <input placeholder="Name" type="text" name="name" id="name">
+    </div>
+
+    <div>
+        <label for="">Weight</label>
+        <input placeholder="Weight" type="text" name="weight" id="weight">
+    </div>
+
+    <div>
+        <label for="">Dimension X</label>
+        <input placeholder="Dimension X" type="text" name="dimension_x" id="dimension_x">
+    </div>
+
+    <div>
+        <label for="">Dimension Y</label>
+        <input placeholder="Dimension Y" type="text" name="dimension_y" id="dimension_y">
+    </div>
+
+    <div>
+        <label for="">Dimension Z</label>
+        <input placeholder="Dimension Z" type="text" name="dimension_z" id="dimension_z">
+    </div>
+
+    <div>
+        <label for="">Is this item a packable bag? </label>
+        <input type="radio" name="packable_yes" id="packable_yes">
+        <label for="packable">Yes</label><br>
+        <input type="radio" name="packable_no" id="packable_no">
+        <label for="packable">No</label><br>
+    </div>
+
+    
+    
+    <div class="mb-4">
+        <input type="submit" name="Add Item" value="Add Item">
+    </div>
+</form>
+
+{% endblock %}
