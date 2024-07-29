@@ -15,7 +15,7 @@ def dashboard(request):
     	'packs': packs
     }
     
-    return render(request, 'dashboard.html', context)
+    return render(request, 'packr/dashboard.html', context)
 
 
 @login_required
@@ -34,4 +34,7 @@ def add_item(request):
         item.save()
 
     
-    return render(request, 'additem.html')
+    return render(request, 'packr/additem.html')
+
+def home(request):
+    return render(request, 'packr/home.html')
