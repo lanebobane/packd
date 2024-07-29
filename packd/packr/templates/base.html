@@ -1,11 +1,15 @@
 {% load static %}
 <html>
 <body>
-<a href="{% url 'packr:dashboard' %}">Dashboard</a>
-<a href="{% url 'packr:add_item' %}">Add Item</a>
+<div>
+	<div>Packd: Making the world of packing bags a better place<div>
+	<div>
+		<a href="{% url 'packr:dashboard' %}">Dashboard</a>
+		<a href="{% url 'packr:add_item' %}">Add Item</a>
+	</div>
+	<div>
+	{% block content %}
 
-{% block content %}
-
-{% endblock %}		
+	{% endblock %}		
 </body>
 </html>

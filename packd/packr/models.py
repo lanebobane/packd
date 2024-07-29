@@ -17,6 +17,9 @@ class Item(models.Model):
     def __str__(self):
         return self.name
 
+    def volume(self):
+        return self.dimension_x * self.dimension_y * self.dimension_z
+
 class Pack(models.Model):
     name = models.CharField(max_length=100, default=None)
     bag = models.ForeignKey(Item, related_name="bag", on_delete=models.CASCADE)
