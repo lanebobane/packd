@@ -2,12 +2,16 @@
 <html>
 <body>
 	<div>Packd: Making the world of packing bags a better place<div>
+		<div>
+			Welcome, {{user.get_username}}
+		</div>
     	<div>
     		<a href="{% url 'packr:home' %}">Home</a>
 			{% if user.is_authenticated %}
 			<a href="{% url 'users:logout' %}">Logout</a>
 			<a href="{% url 'packr:dashboard' %}">Dashboard</a>
 			<a href="{% url 'packr:add_item' %}">Add Item</a>
+			<a href="{% url 'packr:add_pack' %}">Pack Bag</a>
 			{% else %}
 			<a href="{% url 'users:login' %}">Login</a>
 		    <a href="{% url 'users:register' %}">Register</a>

@@ -46,9 +46,6 @@ class NewUserForm(UserCreationForm):
 
     def save(self, commit=True):
         user = super(NewUserForm, self).save(commit=False)
-        # cleaned_data is a dictionary e.g.: 
-        # {'username': 'tesyman', 'email': 'test@testman.com', 'password1': 'superuser', 'password2': 'superuser'}
-        print(f'cleaned data: {self.cleaned_data}')
         user.email = self.cleaned_data['email']
         if commit:
             user.save()
