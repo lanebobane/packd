@@ -35,6 +35,33 @@ def add_item(request):
     
     return render(request, 'packr/additem.html')
 
+@login_required
+def add_pack(request):
+    if request.method == 'GET':
+        packing_items = Item.objects.filter(is_bag=False, traveler=request.user)
+        bags = Item.objects.filter(is_bag=True, traveler=request.user)
+        context = {
+            'packing_items': packing_items,
+            'bags': bags,
+        }
+
+        return render(request, 'packr/addpack.html', context)
+    if request.method == 'POST':
+        packname = request.POST.get('packname')
+        traveler = request.user
+        # TODO: probably need to change this to only allow one bag to be used in a pack, right? 
+        bag_id = [int(b) for b in request.POST.getlist('bagnames')][0]
+        item_ids = [int(i) for i in request.POST.getlist('itemnames')]
+        
+        bag = Item.objects.filter(pk=bag_id)[0]
+        items = Item.objects.filter(pk__in=item_ids)
+
+        pack = Pack.objects.create(name=packname, bag=bag, traveler=traveler)
+        pack.items.set(items)
+
+        return redirect('/dashboard')
+
+
 def home(request):
     return render(request, 'packr/home.html')
 
