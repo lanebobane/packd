@@ -71,3 +71,10 @@ def delete_item(request, pk):
     if request.method == 'POST':
         item.delete()
         return redirect('/dashboard')
+
+def delete_pack(request, pk):
+    pack = get_object_or_404(Pack, pk=pk)
+
+    if request.method == 'POST':
+        pack.delete()
+        return redirect('/dashboard')

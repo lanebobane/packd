@@ -6,18 +6,6 @@
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
 
-<!-- 
-    {% for friend in friends %}
-
-<input type="checkbox" name="recommendations" id="option{{friend.id}}" value={{friend.username}} />
-<label for="option{{friend.id}}"><b>{{friend.username}}</b></label><br />
-
-{% endfor %}
- -->
-
-
-
-
     <div>
         <label for="">Pack Name</label>
         <input placeholder="Pack Name" type="text" name="packname" id="packname">

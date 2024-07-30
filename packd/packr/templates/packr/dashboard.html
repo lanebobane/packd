@@ -1,6 +1,6 @@
 {% extends 'packr/base.html' %}
 {% block content %}
-<div>My Packing Dashboard</div>
+<h1>My Packing Dashboard</h1>
 
 <h2>Items</h2>
 {% for item in packing_items %}
@@ -38,6 +38,10 @@
         <div>{{item.name}}</div>
     {% endfor %}
     <br>
+    <form action="{% url 'packr:delete_pack' pack.id %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="delete pack">
+    </form>
 {% endfor %}
 
 {% endblock %}

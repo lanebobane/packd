@@ -2,6 +2,9 @@
 <html>
 <body>
 	<div>Packd: Making the world of packing bags a better place<div>
+		<div>
+			Welcome, {{user.get_username}}
+		</div>
     	<div>
     		<a href="{% url 'packr:home' %}">Home</a>
 			{% if user.is_authenticated %}

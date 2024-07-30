@@ -9,6 +9,6 @@ urlpatterns = [
     path('dashboard', views.dashboard, name='dashboard'),
     path('items/add', views.add_item, name='add_item'),
     path('pack/add', views.add_pack, name='add_pack'),
-    path('items/delete/(?P<pk>[0-9]+)/$', views.delete_item, name='delete_item')
-
+    path('items/delete/(?P<pk>[0-9]+)/$', views.delete_item, name='delete_item'),
+    path('pack/delete/(?P<pk>[0-9]+)/$', views.delete_pack, name='delete_pack')
 ]
