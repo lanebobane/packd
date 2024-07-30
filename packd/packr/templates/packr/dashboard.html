@@ -9,6 +9,10 @@
     <div>Y: {{item.dimension_y}}"</div>
     <div>Z: {{item.dimension_z}}"</div>
     <div>Weight: {{item.weight}} lbs.</div>
+    <form action="{% url 'packr:delete_item' item.id %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="delete item">
+    </form>
     <br>
 {% endfor %}
 
@@ -19,6 +23,10 @@
     <div class="text-green-500">Y: {{item.dimension_y}}"</div>
     <div class="text-green-500">Z: {{item.dimension_z}}"</div>
     <div class="text-green-500">Weight: {{item.weight}} lbs.</div>
+    <form action="{% url 'packr:delete_item' item.id %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="delete item">
+    </form>
     <br>
 {% endfor %}
 
