@@ -12,4 +12,5 @@ urlpatterns = [
     path('items/delete/(?P<pk>[0-9]+)/$', views.delete_item, name='delete_item'),
     path('pack/delete/(?P<pk>[0-9]+)/$', views.delete_pack, name='delete_pack'),
     path('pack/share/(?P<pk>[0-9]+)/$', views.share_pack, name='share_pack'),
+    path('pack/adopt/(?P<pk>[0-9]+)/$', views.adopt_pack, name='adopt_pack'),
 ]
