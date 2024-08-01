@@ -68,20 +68,26 @@ def home(request):
 def share_pack(request, pk):
     if request.method == 'POST':
         obj = Pack.objects.filter(pk=pk)
+        copied_items = obj[0].items.all()
         data = dict(obj.values()[0])
         data.pop('id')
         data.pop('traveler_id')
-        Pack.objects.create(**data).save()
+        pack = Pack.objects.create(**data)
+        pack.items.set(copied_items)
+
+
 
         return redirect('/dashboard')
 
 def adopt_pack(request, pk):
     if request.method == 'POST':
         obj = Pack.objects.filter(pk=pk)
+        copied_items = obj[0].items.all()
         data = dict(obj.values()[0])
         data.pop('id')
         data['traveler_id'] = request.user.id
-        Pack.objects.create(**data).save()
+        pack = Pack.objects.create(**data)
+        pack.items.set(copied_items)
 
         return redirect('/dashboard')
 
@@ -96,5 +102,5 @@ def delete_pack(request, pk):
     pack = get_object_or_404(Pack, pk=pk)
     if request.method == 'POST':
         pack.delete()
-        
+
         return redirect('/dashboard')
