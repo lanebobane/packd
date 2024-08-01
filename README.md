@@ -12,7 +12,7 @@ Coming soon.
 
 * Add 'bag total weight' and 'bag total volume' calculation and add warnings. 
 * ~Create Pack~
-* Share Pack
+* ~Share Pack~
 
 ## Future functionality
 
