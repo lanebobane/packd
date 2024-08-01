@@ -29,3 +29,10 @@ class Pack(models.Model):
 
     def __str__(self):
         return self.name
+
+    def volume_remaining(self):
+        vol_remaining = self.bag.volume()
+        for i in self.items.all():
+            vol_remaining-=i.volume()
+
+        return vol
