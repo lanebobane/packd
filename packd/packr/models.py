@@ -22,7 +22,7 @@ class Item(models.Model):
 
 class Pack(models.Model):
     name = models.CharField(max_length=100, default=None)
-    bag = models.ForeignKey(Item, related_name="bag", on_delete=models.CASCADE)
+    bag = models.ForeignKey(Item, related_name="bag", null=True, on_delete=models.CASCADE)
     items = models.ManyToManyField(Item, related_name="items")
 
     traveler = models.ForeignKey(User, on_delete=models.CASCADE, default=None, null=True, blank=True)
@@ -35,4 +35,4 @@ class Pack(models.Model):
         for i in self.items.all():
             vol_remaining-=i.volume()
 
-        return vol
+        return vol_remaining

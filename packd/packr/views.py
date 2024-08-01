@@ -72,10 +72,10 @@ def share_pack(request, pk):
         data = dict(obj.values()[0])
         data.pop('id')
         data.pop('traveler_id')
+        #TODO: Do we want to add an option to share bag? Same with adopt. 
+        data.pop('bag_id')
         pack = Pack.objects.create(**data)
         pack.items.set(copied_items)
-
-
 
         return redirect('/dashboard')
 
