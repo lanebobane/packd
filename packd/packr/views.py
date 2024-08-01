@@ -63,7 +63,25 @@ def add_pack(request):
 
 
 def home(request):
+
+    anonymous_packs = Packs.objects.filter(traveler=None)
+    context = {'packs': anonymous_packs}
+
     return render(request, 'packr/home.html')
+
+def share_pack(request, pk):
+    
+
+    if request.method == 'POST':
+        obj = Pack.objects.filter(pk=pk)
+        data = dict(obj.values()[0])
+        print(data)
+        data.pop('id')
+        data.pop('traveler_id')
+
+        Pack.objects.create(**data).save()
+
+        return redirect('/dashboard')
 
 def delete_item(request, pk):
     item = get_object_or_404(Item, pk=pk)
