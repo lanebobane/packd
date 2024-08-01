@@ -11,7 +11,7 @@ Coming soon.
 ## Todos (not prioritized)
 
 * Add 'bag total weight' and 'bag total volume' calculation and add warnings. 
-* Create Pack
+* ~Create Pack~
 * Share Pack
 
 ## Future functionality
