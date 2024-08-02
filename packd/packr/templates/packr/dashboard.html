@@ -33,12 +33,17 @@
 <h2>Packs</h2>
 {% for pack in packs %}
     <div>{{pack.name}}</div>
+    <div>Pack total weight: {{pack.pack_weight}} lbs.</div>
     <div>Bag: {{pack.bag}}</div>
+    {% if pack.bag %}
     <div>Bag total volume: {{pack.bag.volume}} square inches.</div>
+    {% else %}
+    <div>Bag total volume: 0 square inches (no bag selected).</div>
+    {% endif %}
     <div>Volume remaining: {{pack.volume_remaining}} square inches.</div>
     {% if pack.volume_remaining < 0 %}
     <div>Warning! This bag is overpacked!</div>
-    {% endif %}
+    {% endif %} 
     <div>Items:</div>
     {% for item in pack.items.all %}
         <div>{{item.name}}</div>

@@ -31,8 +31,11 @@ class Pack(models.Model):
         return self.name
 
     def volume_remaining(self):
-        vol_remaining = self.bag.volume()
+        vol_remaining = self.bag.volume() if self.bag else 0
         for i in self.items.all():
             vol_remaining-=i.volume()
 
         return vol_remaining
+
+    def pack_weight(self):
+        return sum([item.weight for item in self.items.all()])
