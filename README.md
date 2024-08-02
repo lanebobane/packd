@@ -10,12 +10,12 @@ Coming soon.
 
 ## Todos (not prioritized)
 
-* Add 'bag total weight' and 'bag total volume' calculation and add warnings. 
+* Style front end
+* Standard packing lists for particular activities
+* Item images
+* Seed database
+* Bag costs
+* Shipping vs carrying comparison tool
+* ~Add 'bag total weight' and 'bag total volume' calculation and add warnings.~ 
 * ~Create Pack~
 * ~Share Pack~
-
-## Future functionality
-
-1. Standard packing lists for particular activities
-2. Bag costs
-3. Shipping vs carrying comparison tool
