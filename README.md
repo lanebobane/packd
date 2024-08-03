@@ -11,6 +11,7 @@ Coming soon.
 ## Todos (not prioritized)
 
 * Style front end
+* Edit Item / Edit Pack
 * Standard packing lists for particular activities
 * Item images
 * Seed database
