@@ -13,6 +13,7 @@ Coming soon.
 * Style front end
 * Edit Item / Edit Pack
 * Standard packing lists for particular activities
+* Adopt Item
 * Item images
 * Seed database
 * Bag costs
