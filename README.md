@@ -12,9 +12,9 @@ Coming soon.
 
 * Style front end
 * Add tests for Models and Forms
-* Edit Item / Edit Pack
 * Item images
 * Seed database
+* * ~Edit Item / Edit Pack~
 * ~Add 'bag total weight' and 'bag total volume' calculation and add warnings.~ 
 * ~Create Pack~
 * ~Share Pack~
