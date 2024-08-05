@@ -1,8 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-# Create your models here.
-
 class Item(models.Model):
 
     name = models.CharField(max_length=100)
@@ -34,7 +32,6 @@ class Pack(models.Model):
         vol_remaining = self.bag.volume() if self.bag else 0
         for i in self.items.all():
             vol_remaining-=i.volume()
-
         return vol_remaining
 
     def pack_weight(self):
