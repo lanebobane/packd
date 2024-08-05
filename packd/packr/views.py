@@ -48,7 +48,9 @@ def add_pack(request):
             return redirect('/dashboard')
 
     form = PackForm()
-    form.fields['bag'].queryset = Item.objects.filter(is_bag=True)
+    traveler = User.objects.get(username=request.user)
+    form.fields['bag'].queryset = Item.objects.filter(is_bag=True, traveler=traveler)
+    form.fields['items'].queryset = Item.objects.filter(traveler=traveler)
     context = { 'form': form }
     return render(request, 'packr/addpack.html', context)
 
