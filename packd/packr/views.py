@@ -4,6 +4,8 @@ from .models import Item, Pack
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
+from django.http import HttpResponseForbidden
+
 
 
 # Create your views here.
@@ -23,16 +25,21 @@ def dashboard(request):
 
 
 @login_required
-def add_item(request):
-    if request.method == 'POST':
-        form = ItemForm(request.POST)
-        if form.is_valid():
-            item = form.save()
-            item.traveler = User.objects.get(username=request.user)
-            item.save()
-            return redirect('/items/add')
+def add_item(request, **kwargs):
+    pk = kwargs.get('pk')
+    if pk:
+        item = get_object_or_404(Item, pk=pk)
+        if item.traveler != request.user:
+            return HttpResponseForbidden()
+    else:
+        item = Item(traveler=request.user)
 
-    form = ItemForm()
+    form = ItemForm(request.POST or None, instance=item)
+
+    if request.method == 'POST' and form.is_valid():
+        item = form.save()
+        return redirect('/items/add')
+
     context = { 'form': form }
     
     return render(request, 'packr/additem.html', context)
