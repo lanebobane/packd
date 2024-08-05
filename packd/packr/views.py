@@ -45,20 +45,25 @@ def add_item(request, **kwargs):
     return render(request, 'packr/additem.html', context)
 
 @login_required
-def add_pack(request):
-    if request.method == 'POST':
-        form = PackForm(request.POST)
-        if form.is_valid():
-            pack = form.save()
-            pack.traveler = User.objects.get(username=request.user)
-            pack.save()
-            return redirect('/dashboard')
+def add_pack(request, **kwargs):
+    pk = kwargs.get('pk')
+    if pk:
+        pack = get_object_or_404(Pack, pk=pk)
+        if pack.traveler != request.user:
+            return HttpResponseForbidden()
+    else:
+        pack = Pack(traveler=request.user)
 
-    form = PackForm()
-    traveler = User.objects.get(username=request.user)
-    form.fields['bag'].queryset = Item.objects.filter(is_bag=True, traveler=traveler)
-    form.fields['items'].queryset = Item.objects.filter(traveler=traveler)
+    form = PackForm(request.POST or None, instance=pack)
+    form.fields['bag'].queryset = Item.objects.filter(is_bag=True, traveler=request.user)
+    form.fields['items'].queryset = Item.objects.filter(traveler=request.user)
+
+    if request.method == 'POST' and form.is_valid():
+        pack = form.save()
+        return redirect('/dashboard')
+
     context = { 'form': form }
+    
     return render(request, 'packr/addpack.html', context)
 
 

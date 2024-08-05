@@ -57,6 +57,10 @@
         {% csrf_token %}
         <input type="submit" value="delete pack">
     </form>
+    <form action="{% url 'packr:add_pack' pack.id %}" method="get">
+        {% csrf_token %}
+        <input type="submit" value="edit pack">
+    </form>
     <form action="{% url 'packr:share_pack' pack.id %}" method="post">
         {% csrf_token %}
         <input type="submit" value="share pack">
