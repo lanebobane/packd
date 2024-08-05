@@ -13,6 +13,10 @@
         {% csrf_token %}
         <input type="submit" value="delete item">
     </form>
+    <form action="{% url 'packr:add_item' item.id %}" method="get">
+        {% csrf_token %}
+        <input type="submit" value="edit item">
+    </form>
     <br>
 {% endfor %}
 
