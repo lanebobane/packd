@@ -1,17 +1,20 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
+from .forms import ItemForm
 from .models import Item, Pack
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.models import User
+
 
 # Create your views here.
 
 @login_required
 def dashboard(request):
-    packing_items = Item.objects.filter(is_bag=False, traveler=request.user)
+    items = Item.objects.filter(is_bag=False, traveler=request.user)
     bags = Item.objects.filter(is_bag=True, traveler=request.user)
     packs = Pack.objects.filter(traveler=request.user)
     context = {
-    	'packing_items': packing_items,
+    	'items': items,
     	'bags': bags,
     	'packs': packs
     }
@@ -21,17 +24,28 @@ def dashboard(request):
 
 @login_required
 def add_item(request):
+    # if request.method == 'POST':
+    #     name = request.POST.get('name')
+    #     weight = request.POST.get('weight')
+    #     dimension_x = request.POST.get('dimension_x')
+    #     dimension_y = request.POST.get('dimension_y')
+    #     dimension_z = request.POST.get('dimension_z')
+    #     is_packable = True if request.POST.get('packable_yes') == 'on' else False
+    #     item = Item(name=name, weight=weight, dimension_x=dimension_x, dimension_y=dimension_y, dimension_z=dimension_z, is_bag=is_packable, traveler=request.user)
+    #     item.save()
+
     if request.method == 'POST':
-        name = request.POST.get('name')
-        weight = request.POST.get('weight')
-        dimension_x = request.POST.get('dimension_x')
-        dimension_y = request.POST.get('dimension_y')
-        dimension_z = request.POST.get('dimension_z')
-        is_packable = True if request.POST.get('packable_yes') == 'on' else False
-        item = Item(name=name, weight=weight, dimension_x=dimension_x, dimension_y=dimension_y, dimension_z=dimension_z, is_bag=is_packable, traveler=request.user)
-        item.save()
+        form = ItemForm(request.POST)
+        if form.is_valid():
+            item = form.save()
+            item.traveler = User.objects.get(username=request.user)
+            item.save()
+            return redirect('/items/add')
+
+    form = ItemForm()
+    context = {'form': form}
     
-    return render(request, 'packr/additem.html')
+    return render(request, 'packr/additem.html', context)
 
 @login_required
 def add_pack(request):
@@ -79,6 +93,7 @@ def share_pack(request, pk):
 
         return redirect('/dashboard')
 
+# TODO: When adopting a pack, should the user also gain copies of the included items? 
 def adopt_pack(request, pk):
     if request.method == 'POST':
         obj = Pack.objects.filter(pk=pk)
