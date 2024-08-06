@@ -41,6 +41,7 @@ LOGIN_REDIRECT_URL = 'packr:home'
 INSTALLED_APPS = [
     'packr',
     'users',
+    'coverage',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
