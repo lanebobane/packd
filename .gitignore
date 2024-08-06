@@ -11,3 +11,5 @@ venv/
 
 # Dbs
 *.sqlite3
+
+.coverage
