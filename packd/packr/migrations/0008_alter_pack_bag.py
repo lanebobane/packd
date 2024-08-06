@@ -7,13 +7,18 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('packr', '0007_pack_name'),
+        ("packr", "0007_pack_name"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='pack',
-            name='bag',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='bag', to='packr.item'),
+            model_name="pack",
+            name="bag",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="bag",
+                to="packr.item",
+            ),
         ),
     ]

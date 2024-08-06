@@ -9,54 +9,101 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('auth', '0012_alter_user_first_name_max_length'),
+        ("auth", "0012_alter_user_first_name_max_length"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Bag',
+            name="Bag",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('bag_name', models.CharField(max_length=100)),
-                ('dimension_x', models.DecimalField(decimal_places=2, max_digits=5)),
-                ('dimension_y', models.DecimalField(decimal_places=2, max_digits=5)),
-                ('dimension_z', models.DecimalField(decimal_places=2, max_digits=5)),
-                ('traveler', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='auth.user')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("bag_name", models.CharField(max_length=100)),
+                ("dimension_x", models.DecimalField(decimal_places=2, max_digits=5)),
+                ("dimension_y", models.DecimalField(decimal_places=2, max_digits=5)),
+                ("dimension_z", models.DecimalField(decimal_places=2, max_digits=5)),
+                (
+                    "traveler",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="auth.user"
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Item',
+            name="Item",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('item_name', models.CharField(max_length=100)),
-                ('weight', models.DecimalField(decimal_places=2, max_digits=5)),
-                ('dimension_x', models.DecimalField(decimal_places=2, max_digits=5)),
-                ('dimension_y', models.DecimalField(decimal_places=2, max_digits=5)),
-                ('dimension_z', models.DecimalField(decimal_places=2, max_digits=5)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("item_name", models.CharField(max_length=100)),
+                ("weight", models.DecimalField(decimal_places=2, max_digits=5)),
+                ("dimension_x", models.DecimalField(decimal_places=2, max_digits=5)),
+                ("dimension_y", models.DecimalField(decimal_places=2, max_digits=5)),
+                ("dimension_z", models.DecimalField(decimal_places=2, max_digits=5)),
             ],
         ),
         migrations.CreateModel(
-            name='Trip',
+            name="Trip",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('trip_name', models.CharField(max_length=100)),
-                ('traveler', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='auth.user')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("trip_name", models.CharField(max_length=100)),
+                (
+                    "traveler",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="auth.user"
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Compartment',
+            name="Compartment",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('compartment_name', models.CharField(max_length=100)),
-                ('dimension_x', models.DecimalField(decimal_places=2, max_digits=5)),
-                ('dimension_y', models.DecimalField(decimal_places=2, max_digits=5)),
-                ('dimension_z', models.DecimalField(decimal_places=2, max_digits=5)),
-                ('bag', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='packr.bag')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("compartment_name", models.CharField(max_length=100)),
+                ("dimension_x", models.DecimalField(decimal_places=2, max_digits=5)),
+                ("dimension_y", models.DecimalField(decimal_places=2, max_digits=5)),
+                ("dimension_z", models.DecimalField(decimal_places=2, max_digits=5)),
+                (
+                    "bag",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="packr.bag"
+                    ),
+                ),
             ],
         ),
         migrations.AddField(
-            model_name='bag',
-            name='trips',
-            field=models.ManyToManyField(to='packr.Trip'),
+            model_name="bag",
+            name="trips",
+            field=models.ManyToManyField(to="packr.Trip"),
         ),
     ]

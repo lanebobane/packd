@@ -6,20 +6,20 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('packr', '0003_alter_bag_dimension_x_alter_bag_dimension_y_and_more'),
+        ("packr", "0003_alter_bag_dimension_x_alter_bag_dimension_y_and_more"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='item',
-            name='compartments',
+            model_name="item",
+            name="compartments",
         ),
         migrations.AddField(
-            model_name='item',
-            name='bags',
-            field=models.ManyToManyField(to='packr.Bag'),
+            model_name="item",
+            name="bags",
+            field=models.ManyToManyField(to="packr.Bag"),
         ),
         migrations.DeleteModel(
-            name='Compartment',
+            name="Compartment",
         ),
     ]

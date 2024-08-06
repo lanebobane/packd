@@ -6,58 +6,58 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('packr', '0002_item_compartments'),
+        ("packr", "0002_item_compartments"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='bag',
-            name='dimension_x',
+            model_name="bag",
+            name="dimension_x",
             field=models.FloatField(),
         ),
         migrations.AlterField(
-            model_name='bag',
-            name='dimension_y',
+            model_name="bag",
+            name="dimension_y",
             field=models.FloatField(),
         ),
         migrations.AlterField(
-            model_name='bag',
-            name='dimension_z',
+            model_name="bag",
+            name="dimension_z",
             field=models.FloatField(),
         ),
         migrations.AlterField(
-            model_name='compartment',
-            name='dimension_x',
+            model_name="compartment",
+            name="dimension_x",
             field=models.FloatField(),
         ),
         migrations.AlterField(
-            model_name='compartment',
-            name='dimension_y',
+            model_name="compartment",
+            name="dimension_y",
             field=models.FloatField(),
         ),
         migrations.AlterField(
-            model_name='compartment',
-            name='dimension_z',
+            model_name="compartment",
+            name="dimension_z",
             field=models.FloatField(),
         ),
         migrations.AlterField(
-            model_name='item',
-            name='dimension_x',
+            model_name="item",
+            name="dimension_x",
             field=models.FloatField(),
         ),
         migrations.AlterField(
-            model_name='item',
-            name='dimension_y',
+            model_name="item",
+            name="dimension_y",
             field=models.FloatField(),
         ),
         migrations.AlterField(
-            model_name='item',
-            name='dimension_z',
+            model_name="item",
+            name="dimension_z",
             field=models.FloatField(),
         ),
         migrations.AlterField(
-            model_name='item',
-            name='weight',
+            model_name="item",
+            name="weight",
             field=models.FloatField(),
         ),
     ]
