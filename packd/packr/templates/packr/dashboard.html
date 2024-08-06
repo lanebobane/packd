@@ -7,7 +7,7 @@
 <div class="grid-container">
 {% for item in items %}
     <div class="grid-item">
-        <div>{{item.name}}</div>
+        <h4>{{item.name}}</h4>
         <div>X: {{item.dimension_x}}"</div>
         <div>Y: {{item.dimension_y}}"</div>
         <div>Z: {{item.dimension_z}}"</div>
@@ -30,7 +30,7 @@
 <h2>Bags</h2>
 {% for item in bags %}
     <div class="grid-item">
-        <div>{{item.name}}</div>
+        <h4>{{item.name}}</h4>
         <div>X: {{item.dimension_x}}"</div>
         <div>Y: {{item.dimension_y}}"</div>
         <div>Z: {{item.dimension_z}}"</div>
@@ -48,7 +48,7 @@
 <h2>Packs</h2>
 {% for pack in packs %}
     <div class="grid-item">
-        <div>{{pack.name}}</div>
+        <h4>{{pack.name}}</h4>
         <div>Pack total weight: {{pack.pack_weight}} lbs.</div>
         <div>Bag: {{pack.bag}}</div>
         {% if pack.bag %}
