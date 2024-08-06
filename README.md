@@ -14,7 +14,7 @@ Coming soon.
 * Add tests for Models and Forms
 * Item images
 * Seed database
-* * ~Edit Item / Edit Pack~
+* ~Edit Item / Edit Pack~
 * ~Add 'bag total weight' and 'bag total volume' calculation and add warnings.~ 
 * ~Create Pack~
 * ~Share Pack~
