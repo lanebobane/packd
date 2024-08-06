@@ -12,11 +12,9 @@ def register(request):
         form = NewUserForm(request.POST)
         if form.is_valid():
             user = form.save()
-            return redirect('/dashboard')
-        
-    form = NewUserForm()
-    context = {
-        'form': form
-    }
+            return redirect("/dashboard")
 
-    return render(request, 'register.html', context)
+    form = NewUserForm()
+    context = {"form": form}
+
+    return render(request, "register.html", context)
