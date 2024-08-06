@@ -7,54 +7,72 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('auth', '0012_alter_user_first_name_max_length'),
-        ('packr', '0004_remove_item_compartments_item_bags_and_more'),
+        ("auth", "0012_alter_user_first_name_max_length"),
+        ("packr", "0004_remove_item_compartments_item_bags_and_more"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Pack',
+            name="Pack",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
             ],
         ),
         migrations.RemoveField(
-            model_name='trip',
-            name='traveler',
+            model_name="trip",
+            name="traveler",
         ),
         migrations.RenameField(
-            model_name='item',
-            old_name='item_name',
-            new_name='name',
+            model_name="item",
+            old_name="item_name",
+            new_name="name",
         ),
         migrations.RemoveField(
-            model_name='item',
-            name='bags',
+            model_name="item",
+            name="bags",
         ),
         migrations.AddField(
-            model_name='item',
-            name='is_bag',
+            model_name="item",
+            name="is_bag",
             field=models.BooleanField(default=False),
         ),
         migrations.AddField(
-            model_name='item',
-            name='traveler',
-            field=models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.CASCADE, to='auth.user'),
+            model_name="item",
+            name="traveler",
+            field=models.ForeignKey(
+                blank=True,
+                default=None,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="auth.user",
+            ),
         ),
         migrations.DeleteModel(
-            name='Bag',
+            name="Bag",
         ),
         migrations.DeleteModel(
-            name='Trip',
+            name="Trip",
         ),
         migrations.AddField(
-            model_name='pack',
-            name='bag',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='bag', to='packr.item'),
+            model_name="pack",
+            name="bag",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="bag",
+                to="packr.item",
+            ),
         ),
         migrations.AddField(
-            model_name='pack',
-            name='items',
-            field=models.ManyToManyField(related_name='items', to='packr.Item'),
+            model_name="pack",
+            name="items",
+            field=models.ManyToManyField(related_name="items", to="packr.Item"),
         ),
     ]

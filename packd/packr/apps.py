@@ -2,5 +2,5 @@ from django.apps import AppConfig
 
 
 class PackrConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'packr'
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "packr"
