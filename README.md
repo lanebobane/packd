@@ -12,6 +12,9 @@ Coming soon.
 
 * Style front end
 * Move adopt/share logic to Model code (and out of view code).
+* Packr views tests
+* NewUserFrom tests
+* User views tests
 * Item images
 * Seed database
 * * ~Add tests for Models and Forms~
