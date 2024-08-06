@@ -109,5 +109,37 @@ class ItemTest(TestCase):
         item1 = self.create_item(traveler)
         item2 = self.create_item(traveler)
         pack = self.create_pack(traveler, "test_pack_creation", bag, [item1, item2])
+        self.assertTrue(isinstance(pack, Pack))
+        self.assertEqual(pack.__str__(), "test_pack_creation")
         self.assertTrue(pack.traveler.id == traveler.id)
         self.assertTrue(len(pack.items.all()) == 2)
+
+    def test_pack_volume_remaining(self):
+	    traveler = self.create_traveler_a()
+	    traveler.save()
+	    bag = self.create_bag(traveler)
+	    item1 = self.create_item(traveler)
+	    item2 = self.create_item(traveler)
+	    pack = self.create_pack(traveler, "test_pack_volume_remaining", bag, [item1, item2])
+	    self.assertTrue(pack.volume_remaining() == -234)
+
+    def test_pack_item_ownership(self):
+    	traveler = self.create_traveler_a()
+    	traveler.save()
+    	bag = self.create_bag(traveler)
+    	item1 = self.create_item(traveler)
+    	item2 = self.create_item(traveler)
+    	pack = self.create_pack(traveler, "test_pack_volume_remaining", bag, [item1, item2])
+    	for item in pack.items.all():
+    		if item.traveler.id != traveler.id:
+    			self.assertFalse(True)
+    	self.assertTrue(True)
+
+    def test_pack_weight(self):
+    	traveler = self.create_traveler_a()
+    	traveler.save()
+    	bag = self.create_bag(traveler)
+    	item1 = self.create_item(traveler)
+    	item2 = self.create_item(traveler)
+    	pack = self.create_pack(traveler, "test_pack_volume_remaining", bag, [item1, item2])
+    	self. assertTrue(pack.pack_weight() == 30)
