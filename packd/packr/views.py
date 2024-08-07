@@ -90,13 +90,13 @@ def share_pack(request, pk):
 # TODO: When adopting a pack, should the user also gain copies of the included items?
 def adopt_pack(request, pk):
     if request.method == "POST":
-        obj = Pack.objects.filter(pk=pk)
-        copied_items = obj[0].items.all()
-        data = dict(obj.values()[0])
+        pack = Pack.objects.filter(pk=pk)
+        copied_items = pack[0].items.all()
+        data = dict(pack.values()[0])
         data.pop("id")
         data["traveler_id"] = request.user.id
-        pack = Pack.objects.create(**data)
-        pack.items.set(copied_items)
+        new_pack = Pack.objects.create(**data)
+        new_pack.items.set(copied_items)
 
         return redirect("/dashboard")
 
