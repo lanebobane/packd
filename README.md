@@ -11,9 +11,13 @@ Coming soon.
 ## Todos (not prioritized)
 
 * Style front end
-* Add tests for Models and Forms
+* Move adopt/share logic to Model code (and out of view code).
+* Packr views tests
+* NewUserFrom tests
+* User views tests
 * Item images
 * Seed database
+* * ~Add tests for Models and Forms~
 * ~Edit Item / Edit Pack~
 * ~Add 'bag total weight' and 'bag total volume' calculation and add warnings.~ 
 * ~Create Pack~
