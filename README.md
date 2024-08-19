@@ -11,7 +11,7 @@ Coming soon.
 ## Todos (not prioritized)
 
 * Style front end
-* Move adopt/share logic to Model code (and out of view code).
+* Move adopt/share logic to Model code (and out of view code)?
 * Packr views tests
 * NewUserFrom tests
 * User views tests
