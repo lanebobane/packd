@@ -6,7 +6,9 @@ An application to help better pack your bags for travel.
 
 ## Usage
 
-Coming soon.
+Updated to run via Docker/Docker Compose. To run, pull the repository and run: 
+
+`docker-compose up -d --build`
 
 ## Todos (not prioritized)
 
