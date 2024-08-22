@@ -1,0 +1,22 @@
+# version: '3.8'
+
+services:
+  web:
+    build: ./packd
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./packd/:/usr/src/packd/
+    ports:
+      - 8000:8000
+    env_file:
+      - ./packd/.env.dev
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=packd_admin
+      - POSTGRES_PASSWORD=pack_your_bags123
+      - POSTGRES_DB=packd_dev
+volumes:
+  postgres_data:
