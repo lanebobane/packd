@@ -10,3 +10,13 @@ services:
       - 8000:8000
     env_file:
       - ./packd/.env.dev
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=packd_admin
+      - POSTGRES_PASSWORD=pack_your_bags123
+      - POSTGRES_DB=packd_dev
+volumes:
+  postgres_data:
