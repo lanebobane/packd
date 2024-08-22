@@ -36,7 +36,7 @@ ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 # ALLOWED_HOSTS = []
 
 LOGIN_URL = "users/login"
-LOGIN_REDIRECT_URL = "packr:home"
+LOGIN_REDIRECT_URL = "packr:shared_packs"
 
 
 # Application definition
