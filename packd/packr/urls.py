@@ -5,7 +5,7 @@ from . import views
 
 app_name = "packr"
 urlpatterns = [
-    path("", views.home, name="home"),
+    path("", views.shared_packs, name="shared_packs"),
     path("dashboard", views.dashboard, name="dashboard"),
     path("items/add/(?P<pk>[0-9]+)/$", views.add_item, name="add_item"),
     path("items/add", views.add_item, name="add_item"),
