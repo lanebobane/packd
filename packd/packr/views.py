@@ -34,6 +34,8 @@ def add_item(request, **kwargs):
 
     if request.method == "POST" and form.is_valid():
         item = form.save()
+        item.reference_pk = item.id
+        item.save()
         return redirect("/items/add")
 
     context = {"form": form}
@@ -87,32 +89,41 @@ def share_pack(request, pk):
         return redirect("/dashboard")
 
 
-# TODO: When adopting a pack, should the user also gain copies of the included items?
 def adopt_pack(request, pk):
     if request.method == "POST":
-        pack = Pack.objects.filter(pk=pk)
-        # print(f'pack!:{pack}')
-        # TODO: change these to reference items and create copies and set the "referencePK" to these copied_items's pks. 
+        pack = Pack.objects.filter(pk=pk) 
         reference_items = pack[0].items.all()
+        user_items = Item.objects.filter(traveler_id=request.user.id)
+        user_items_values = user_items.values()
+        user_items_dict = {}
+        for item in user_items_values:
+            user_items_dict[item['reference_pk']] = item
+        # i can maybe get rid of this?
+        user_items_reference_ids = [item['reference_pk'] for item in user_items_values]
         copied_items = []
+        existing_items_ids = []
         for item in reference_items:
-            print(type(item.items))
-            print(dir(item))
-            temp_item_data = {
-                'name': item.name,
-                'dimension_x': item.dimension_x,
-                'dimension_y': item.dimension_y,
-                'dimension_z': item.dimension_z,
-                'weight': item.weight,
-                'is_bag': item.is_bag,
-                'traveler_id': request.user.id
-            }
-            item = Item.objects.create(**temp_item_data)
-            copied_items.append(item)
+            if item.id in user_items_reference_ids:
+                existing_items_ids.append(item.id)
+            else:
+                temp_item_data = {
+                    'name': item.name,
+                    'dimension_x': item.dimension_x,
+                    'dimension_y': item.dimension_y,
+                    'dimension_z': item.dimension_z,
+                    'weight': item.weight,
+                    'is_bag': item.is_bag,
+                    'traveler_id': request.user.id,
+                    'reference_pk': item.pk
+                }
+                item = Item.objects.create(**temp_item_data)
+                copied_items.append(item)
 
-            # data = dict(item.values()[0])
-            # item = Item.objects.create(**data)
-            # copied_items.append(item)
+        for item in user_items:
+            if item.reference_pk in existing_items_ids:
+                copied_items.append(item)
+
+
         data = dict(pack.values()[0])
         data.pop("id")
         data["traveler_id"] = request.user.id
