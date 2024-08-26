@@ -13,13 +13,11 @@ Updated to run via Docker/Docker Compose. To run, pull the repository and run:
 ## Todos (not prioritized)
 
 * Style front end
-* Move adopt/share logic to Model code (and out of view code)?
 * Packr views tests
-* NewUserFrom tests
+* NewUserForm tests
 * User views tests
 * Item images
-* Seed database
-* Set up dev database (Digital Ocean?)
+* Set up persistant dev database (Digital Ocean?)
 * ~Add tests for Models and Forms~
 * ~Edit Item / Edit Pack~
 * ~Add 'bag total weight' and 'bag total volume' calculation and add warnings.~ 
