@@ -91,7 +91,28 @@ def share_pack(request, pk):
 def adopt_pack(request, pk):
     if request.method == "POST":
         pack = Pack.objects.filter(pk=pk)
-        copied_items = pack[0].items.all()
+        # print(f'pack!:{pack}')
+        # TODO: change these to reference items and create copies and set the "referencePK" to these copied_items's pks. 
+        reference_items = pack[0].items.all()
+        copied_items = []
+        for item in reference_items:
+            print(type(item.items))
+            print(dir(item))
+            temp_item_data = {
+                'name': item.name,
+                'dimension_x': item.dimension_x,
+                'dimension_y': item.dimension_y,
+                'dimension_z': item.dimension_z,
+                'weight': item.weight,
+                'is_bag': item.is_bag,
+                'traveler_id': request.user.id
+            }
+            item = Item.objects.create(**temp_item_data)
+            copied_items.append(item)
+
+            # data = dict(item.values()[0])
+            # item = Item.objects.create(**data)
+            # copied_items.append(item)
         data = dict(pack.values()[0])
         data.pop("id")
         data["traveler_id"] = request.user.id
