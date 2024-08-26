@@ -10,6 +10,7 @@ class Item(models.Model):
     dimension_y = models.FloatField()
     dimension_z = models.FloatField()
     is_bag = models.BooleanField(default=False)
+    reference_pk = models.PositiveIntegerField(default=None, null=True, blank=True)
 
     traveler = models.ForeignKey(
         User, on_delete=models.CASCADE, default=None, null=True, blank=True
