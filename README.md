@@ -19,7 +19,8 @@ Updated to run via Docker/Docker Compose. To run, pull the repository and run:
 * User views tests
 * Item images
 * Seed database
-* * ~Add tests for Models and Forms~
+* Set up dev database (Digital Ocean?)
+* ~Add tests for Models and Forms~
 * ~Edit Item / Edit Pack~
 * ~Add 'bag total weight' and 'bag total volume' calculation and add warnings.~ 
 * ~Create Pack~

@@ -19,7 +19,7 @@
 			Welcome, {{user.get_username}}
 		</div>
     	<div>
-    		<a href="{% url 'packr:home' %}">Home</a>
+    		<a href="{% url 'packr:shared_packs' %}">Shared Packs</a>
 			{% if user.is_authenticated %}
 			<a href="{% url 'users:logout' %}">Logout</a>
 			<a href="{% url 'packr:dashboard' %}">Dashboard</a>

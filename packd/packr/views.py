@@ -68,10 +68,10 @@ def add_pack(request, **kwargs):
     return render(request, "packr/addpack.html", context)
 
 
-def home(request):
+def shared_packs(request):
     anonymous_packs = Pack.objects.filter(traveler=None)
     context = {"packs": anonymous_packs}
-    return render(request, "packr/home.html", context)
+    return render(request, "packr/sharedpacks.html", context)
 
 
 def share_pack(request, pk):

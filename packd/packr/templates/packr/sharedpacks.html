@@ -3,8 +3,8 @@
 <h1>Shared Packs</h1>
 
 {% for pack in packs %}
-    <div class="font-bold text-gray-700">{{pack.name}}</div>
-    <div class="text-green-500">Bag: {{pack.bag}}</div>
+    <div>{{pack.name}}</div>
+    <div>Bag: {{pack.bag}}</div>
     {% for item in pack.items.all %}
         <div>{{item.name}}</div>
     {% endfor %}
