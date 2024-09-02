@@ -31,7 +31,7 @@ DEBUG = bool(os.environ.get("DEBUG", default=0))
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 
 LOGIN_URL = "users/login"
-LOGIN_REDIRECT_URL = "packr:shared_packs"
+LOGIN_REDIRECT_URL = "packr:dashboard"
 
 INSTALLED_APPS = [
     "packr",

@@ -10,3 +10,21 @@
 }
 
 body { padding-top: 70px; }
+
+/* form {
+    width: 75%;
+} */
+
+div.form
+{
+    display: block;
+    text-align: center;
+}
+form
+{
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+	width: 50%;
+}
