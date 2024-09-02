@@ -6,12 +6,13 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - ./packd/:/usr/src/packd/
+      - static_volume:/usr/src/packd/staticfiles
     ports:
       - 8000:8000
     env_file:
-      - ./packd/.env.dev
+      - ./.env.dev
   db:
-    image: postgres:13.0-alpine
+    image: postgres:15
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
@@ -20,3 +21,4 @@ services:
       - POSTGRES_DB=packd_dev
 volumes:
   postgres_data:
+  static_volume:

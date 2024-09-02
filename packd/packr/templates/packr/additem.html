@@ -1,9 +1,11 @@
 {% extends 'packr/base.html' %}
 {% block content %}
+<main class="container">
 
-<h1>Add Item/Bag</h1>
+<div class="form">
+    <h1>Add Item/Bag</h1>
 
-<form method="POST">
+<!-- <form method="POST">
     {% csrf_token %}
 
     <label>Name</label>
@@ -26,6 +28,37 @@
 
     <button type="submit">Create Item</button>
 
-</form>
-
+</form> -->
+<form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label class="form-label">Name</label>
+        {{form.name}}
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Weight</label>
+        {{form.weight}}
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Dimension X</label>
+        {{form.dimension_x}}
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Dimension Y</label>
+        {{form.dimension_y}}
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Dimension Z</label>
+        {{form.dimension_z}}
+    </div>
+    <div class="mb-3 form-check">
+    <!-- <div class="mb-3"> -->
+      <!-- <input type="checkbox" class="form-check-input" id="id_is_bag"> -->
+      {{form.is_bag}}
+      <label class="form-check-label" for="exampleCheck1">Is this item a packable bag?</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Create Item</button>
+  </form>
+</div>
+</main>
 {% endblock %}

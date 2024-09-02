@@ -2,6 +2,7 @@ FROM python:3.11.4-slim-buster
 
 # set work directory
 WORKDIR /usr/src/packd
+RUN mkdir /usr/src/packd/staticfiles
 
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
