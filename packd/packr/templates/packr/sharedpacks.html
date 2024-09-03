@@ -1,19 +1,5 @@
 {% extends 'packr/base.html' %}
 {% block content %}
-<!-- 
-{% for pack in packs %}
-    <div>{{pack.name}}</div>
-    <div>Bag: {{pack.bag}}</div>
-    {% for item in pack.items.all %}
-        <div>{{item.name}}</div>
-    {% endfor %}
-    <br>
-    <form action="{% url 'packr:adopt_pack' pack.id %}" method="post">
-        {% csrf_token %}
-        <input type="submit" value="Adopt Pack">
-    </form>
-{% endfor %}
- -->
 
 <main class="container">
     <h1>Shared Packs</h1>
@@ -23,25 +9,18 @@
         <div class="col-md-4 themed-grid-col">
             <h4>{{pack.name}}</h4>
             <div>Pack total weight: {{pack.pack_weight}} lbs.</div>
-            <!-- <div>Bag: {{pack.bag}}</div>
-            {% if pack.bag %}
-            <div>Bag total volume: {{pack.bag.volume}} square inches.</div>
-            {% else %}
-            <div>Bag total volume: 0 square inches (no bag selected).</div>
-            {% endif %}
-            <div>Volume remaining: {{pack.volume_remaining}} square inches.</div>
-            {% if pack.volume_remaining < 0 %}
-            <div>Warning! This bag is overpacked!</div>
-            {% endif %}  -->
+            
             <div>Items:</div>
             {% for item in pack.items.all %}
                 <div>{{item.name}}</div>
             {% endfor %}
             <br>
+            <div class="dash-crud-buttons">
             <form action="{% url 'packr:adopt_pack' pack.id %}" method="post">
                 {% csrf_token %}
                 <input type="submit" value="adopt pack">
-            </form>        
+            </form>
+            </div>        
         </div>
         {% endfor %}
     </div>

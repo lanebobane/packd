@@ -2,49 +2,53 @@
 {% block content %}
 <main class="container">
     <h1>Dashboard</h1>
-    <!-- <div class="container"> -->
     <div>
-    <h2> Items</h2>
-    <div class="row mb-3 text-center">
-        {% for item in items %}
-        <div class="col-md-4 themed-grid-col">
-            <h4>{{item.name}}</h4>
-        <div>X: {{item.dimension_x}}"</div>
-        <div>Y: {{item.dimension_y}}"</div>
-        <div>Z: {{item.dimension_z}}"</div>
-        <div>Weight: {{item.weight}} lbs.</div>
-        <form action="{% url 'packr:delete_item' item.id %}" method="post">
-            {% csrf_token %}
-            <input type="submit" value="delete item">
-        </form>
-        <form action="{% url 'packr:add_item' item.id %}" method="get">
-            {% csrf_token %}
-            <input type="submit" value="edit item">
-        </form>
-        
+        <h2> Items</h2>
+        <div class="row mb-3 text-center">
+            {% for item in items %}
+            <div class="col-md-4 themed-grid-col">
+                <h4>{{item.name}}</h4>
+                <div>X: {{item.dimension_x}}"</div>
+                <div>Y: {{item.dimension_y}}"</div>
+                <div>Z: {{item.dimension_z}}"</div>
+                <div>Weight: {{item.weight}} lbs.</div>
+                <div class="dash-crud-buttons">
+                    <form action="{% url 'packr:delete_item' item.id %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="delete item">
+                    </form>
+                    <form action="{% url 'packr:add_item' item.id %}" method="get">
+                        {% csrf_token %}
+                        <input type="submit" value="edit item">
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-    </div>
 
 
-    <h2> Bags</h2>
-    <div class="row mb-3 text-center">
-        {% for item in bags %}
-        <div class="col-md-4 themed-grid-col">
-            <h4>{{item.name}}</h4>
-            <div>X: {{item.dimension_x}}"</div>
-            <div>Y: {{item.dimension_y}}"</div>
-            <div>Z: {{item.dimension_z}}"</div>
-            <div>Weight: {{item.weight}} lbs.</div>
-            <form action="{% url 'packr:delete_item' item.id %}" method="post">
-                {% csrf_token %}
-                <input type="submit" value="delete item">
-            </form>
-        
-        
+        <h2>Bags</h2>
+        <div class="row mb-3 text-center">
+            {% for item in bags %}
+            <div class="col-md-4 themed-grid-col">
+                <h4>{{item.name}}</h4>
+                <div>X: {{item.dimension_x}}"</div>
+                <div>Y: {{item.dimension_y}}"</div>
+                <div>Z: {{item.dimension_z}}"</div>
+                <div>Weight: {{item.weight}} lbs.</div>
+                <div class="dash-crud-buttons">
+                    <form action="{% url 'packr:delete_item' item.id %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="delete bag">
+                    </form>
+                    <form action="{% url 'packr:add_item' item.id %}" method="get">
+                        {% csrf_token %}
+                        <input type="submit" value="edit bag">
+                    </form>
+                </div>
+            </div>
+            {% endfor %} 
         </div>
-        {% endfor %} 
-    </div>
 
     <h2>Packs</h2>
     <div class="row mb-3 text-center">
@@ -67,6 +71,7 @@
                 <div>{{item.name}}</div>
             {% endfor %}
             <br>
+            <div class="dash-crud-buttons">
             <form action="{% url 'packr:delete_pack' pack.id %}" method="post">
                 {% csrf_token %}
                 <input type="submit" value="delete pack">
@@ -79,6 +84,7 @@
                 {% csrf_token %}
                 <input type="submit" value="share pack">
             </form>
+            </div>
         
         
         </div>
