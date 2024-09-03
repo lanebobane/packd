@@ -1,19 +1,29 @@
 {% extends 'packr/base.html' %}
 {% block content %}
-<h1>Register User</h1>
-<form method="POST">
-    {% csrf_token %}
-    <label>username</label>
-    {{form.username}}
-    <label>email</label>
-    {{form.email}}
-    <label>password</label>
-    {{form.password1}}
-    <label>repeat password</label>
-    {{form.password2}}
-
-    <button class="bg-green-500" type="submit">Register</button>
-
-</form>
+<main class="container">
+    <div class="form">
+        <h1>Register</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+                {{form.username}}
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                {{form.email}}
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                {{form.password1}}
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Confirm Password</label>
+                {{form.password2}}
+            </div>
+            <button type="submit" class="btn btn-primary">Log In</button>
+        </form>
+    </div>
+</main>
 
 {% endblock %}

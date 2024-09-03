@@ -23,8 +23,6 @@ class ItemForm(forms.ModelForm):
                 visible.field.widget.attrs['class'] = 'form-control-checkbox'
             else:    
                 visible.field.widget.attrs['class'] = 'form-control'
-            # print(visible.field.widget.input_type)
-            # print(dir(visible.field.widget))
 
 
 class PackForm(forms.ModelForm):

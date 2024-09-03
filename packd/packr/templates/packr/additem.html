@@ -5,30 +5,6 @@
 <div class="form">
     <h1>Add Item/Bag</h1>
 
-<!-- <form method="POST">
-    {% csrf_token %}
-
-    <label>Name</label>
-    {{form.name}}
-
-    <label>Weight</label>
-    {{form.weight}}
-
-    <label>Dimension X</label>
-    {{form.dimension_x}}
-
-    <label>Dimension Y</label>
-    {{form.dimension_y}}
-
-    <label>Dimension Z</label>
-    {{form.dimension_z}}
-
-    <label>Is this a bag?</label>
-    {{form.is_bag}}
-
-    <button type="submit">Create Item</button>
-
-</form> -->
 <form method="POST">
     {% csrf_token %}
     <div class="mb-3">
@@ -52,8 +28,6 @@
         {{form.dimension_z}}
     </div>
     <div class="mb-3 form-check">
-    <!-- <div class="mb-3"> -->
-      <!-- <input type="checkbox" class="form-check-input" id="id_is_bag"> -->
       {{form.is_bag}}
       <label class="form-check-label" for="exampleCheck1">Is this item a packable bag?</label>
     </div>
