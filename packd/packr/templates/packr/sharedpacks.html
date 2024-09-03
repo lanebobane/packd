@@ -38,10 +38,12 @@
                 <div>{{item.name}}</div>
             {% endfor %}
             <br>
+            <div class="dash-crud-buttons">
             <form action="{% url 'packr:adopt_pack' pack.id %}" method="post">
                 {% csrf_token %}
                 <input type="submit" value="adopt pack">
-            </form>        
+            </form>
+            </div>        
         </div>
         {% endfor %}
     </div>
