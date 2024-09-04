@@ -14,9 +14,13 @@ docker-compose files also exist for staging and production, but they're set up t
 
 ## Screenshots
 
+### Dashboard with a few items already added
 ![Screenshot from 2024-09-04 09-47-15](https://github.com/user-attachments/assets/2da3b5b2-c101-4be0-b9aa-29db05ba8b0b)
-
-
+### Creating a new Pack
+![Screenshot from 2024-09-04 09-55-18](https://github.com/user-attachments/assets/cc9e49a9-cf91-477c-8c24-ae064c57df2c)
+![Screenshot from 2024-09-04 09-55-37](https://github.com/user-attachments/assets/08f50972-5fec-4945-b567-57b35d6bef69)
+### Dashboard with newly-created Pack
+![Screenshot from 2024-09-04 09-55-57](https://github.com/user-attachments/assets/60f46317-0037-433a-9131-6c159711ac1d)
 
 ## Todos (not prioritized)
 
