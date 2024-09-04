@@ -2,7 +2,6 @@
 {% block content %}
 <main class="container">
     <h1>Dashboard</h1>
-    <div>
         <h2> Items</h2>
         <div class="row mb-3 text-center">
             {% for item in items %}
@@ -84,13 +83,10 @@
                 {% csrf_token %}
                 <input type="submit" value="share pack">
             </form>
-            </div>
-        
-        
         </div>
-        {% endfor %}
+        
     </div>
-</div>
+        {% endfor %}
 </main>
 
 

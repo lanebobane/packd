@@ -9,48 +9,47 @@
 <body>
 	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
 		<div class="container-fluid">
-		{% if user.is_authenticated %}
-		  <a class="navbar-brand" href="{% url 'packr:dashboard' %}">Packdr</a>
-		{% else %}
-		<a class="navbar-brand" href="{% url 'users:login' %}">Packdr</a>
-		{% endif %}
-		  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		  </button>
-		  <div class="collapse navbar-collapse" id="navbarCollapse">
-			<ul class="navbar-nav me-auto mb-2 mb-md-0">
-			  <li class="nav-item">
-				<a class="nav-link" aria-current="page" href="{% url 'packr:shared_packs' %}">Shared Packs</a>
-			  </li>
-			  {% if user.is_authenticated %}
-			  <li class="nav-item">
-				<a class="nav-link" href="{% url 'packr:dashboard' %}"">Dashboard</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="{% url 'packr:add_item' %}"">Add Item</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="{% url 'packr:add_pack' %}"">Add Pack</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="{% url 'users:logout' %}"">Logout</a>
-			  </li>
-			  {% else %}
-			  <li class="nav-item">
-				<a class="nav-link" href="{% url 'users:login' %}">Login</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="{% url 'users:register' %}">Register</a>
-			  </li>
-			  {% endif %}
-			</ul>
-		  </div>
+			{% if user.is_authenticated %}
+			<a class="navbar-brand" href="{% url 'packr:dashboard' %}">Packdr</a>
+			{% else %}
+			<a class="navbar-brand" href="{% url 'users:login' %}">Packdr</a>
+			{% endif %}
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarCollapse">
+				<ul class="navbar-nav me-auto mb-2 mb-md-0">
+					<li class="nav-item">
+					<a class="nav-link" aria-current="page" href="{% url 'packr:shared_packs' %}">Shared Packs</a>
+					</li>
+					{% if user.is_authenticated %}
+					<li class="nav-item">
+					<a class="nav-link" href="{% url 'packr:dashboard' %}"">Dashboard</a>
+					</li>
+					<li class="nav-item">
+					<a class="nav-link" href="{% url 'packr:add_item' %}"">Add Item</a>
+					</li>
+					<li class="nav-item">
+					<a class="nav-link" href="{% url 'packr:add_pack' %}"">Add Pack</a>
+					</li>
+					<li class="nav-item">
+					<a class="nav-link" href="{% url 'users:logout' %}"">Logout</a>
+					</li>
+					{% else %}
+					<li class="nav-item">
+					<a class="nav-link" href="{% url 'users:login' %}">Login</a>
+					</li>
+					<li class="nav-item">
+					<a class="nav-link" href="{% url 'users:register' %}">Register</a>
+					</li>
+					{% endif %}
+				</ul>
+			</div>
 		</div>
 	  </nav>
 
 	{% block content %}
 
 	{% endblock %}		
-	</div>
 </body>
 </html>
