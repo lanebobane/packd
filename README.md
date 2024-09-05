@@ -4,14 +4,6 @@
 
 An application to help better pack your bags (for travel, daily life, anyting).
 
-## Usage
-
-Updated to run via Docker/Docker Compose. To run this app locally, pull the repository and run: 
-
-`docker-compose up -d --build`
-
-docker-compose files also exist for staging and production, but they're set up to create an SSL certificate for the particular domain this app is hosted at (www.yosh.ski, a domain I already had for another project), so using those docker-compose files won't work withouth some modifications. 
-
 ## Screenshots
 
 ### Dashboard with a few items already added
