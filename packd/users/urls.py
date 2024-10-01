@@ -6,6 +6,7 @@ from . import views
 app_name = "users"
 urlpatterns = [
     path("register/", views.register, name="register"),
+    path("register_google/", views.GoogleOAuthView.as_view(), name="register_google"),
     path(
         "login/",
         authentication_views.LoginView.as_view(template_name="login.html"),
