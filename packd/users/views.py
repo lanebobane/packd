@@ -4,6 +4,7 @@ import jwt
 from dataclasses import dataclass
 from random import SystemRandom
 from urllib.parse import urlencode
+from urllib.parse import urljoin
 
 from .forms import NewUserForm
 from .models import Profile
@@ -16,6 +17,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.conf import settings
 from django.urls import reverse_lazy
+
 
 UNICODE_ASCII_CHARACTER_SET = ('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')
 
@@ -43,7 +45,12 @@ class GoogleRawLoginCredentials:
 
 class GoogleOAuthView(View):
     def get(self, request, *args, **kwargs):
+
+        google_login_flow = GoogleRawLoginFlowService()
+
         if request.GET.get('code'):
+
+            
 
             code = request.GET.get('code')
             error = request.GET.get('error')
@@ -56,7 +63,7 @@ class GoogleOAuthView(View):
 
             client_id = os.environ.get("GOOGLE_OAUTH2_CLIENT_ID")
             client_secret = os.environ.get("GOOGLE_OAUTH2_CLIENT_SECRET")
-            redirect_uri = 'http://localhost:8000/users/register_google'
+            redirect_uri = google_login_flow._get_redirect_uri()
             grant_type = 'authorization_code'
 
             post_data = {
@@ -69,24 +76,27 @@ class GoogleOAuthView(View):
 
             response = requests.post('https://oauth2.googleapis.com/token', data=post_data)
             data = response.json()
+            print('databloo')
+            print(data)
             id_token = data['id_token']
             decoded_token = jwt.decode(jwt=id_token, options={"verify_signature": False})
             email = decoded_token['email']
             email_verified = decoded_token['email_verified']
+            first_name = decoded_token['given_name']
+            family_name = decoded_token['family_name']
 
             # if email_verified:
             try:
                 user = User.objects.get(email=email)
             
             except ObjectDoesNotExist as e:
-                user = User.objects.create(username=email, email=email)
+                user = User.objects.create(username=email, email=email, first_name=first_name, last_name=family_name )
                 user.save()
             
             login(request, user)
             return redirect("/dashboard")
 
         else: 
-            google_login_flow = GoogleRawLoginFlowService()
             authorization_url, state = google_login_flow.get_authorization_url()
 
             request.session["google_oauth2_state"] = state
@@ -118,7 +128,7 @@ def google_raw_login_get_credentials() -> GoogleRawLoginCredentials:
 
 
 class GoogleRawLoginFlowService:
-    # API_URI = reverse_lazy("api:google-oauth2:login-raw:callback-raw")
+    API_URI = reverse_lazy("users:register_google")
 
     GOOGLE_AUTH_URL = "https://accounts.google.com/o/oauth2/auth"
     GOOGLE_ACCESS_TOKEN_OBTAIN_URL = "https://oauth2.googleapis.com/token"
@@ -126,6 +136,7 @@ class GoogleRawLoginFlowService:
 
     SCOPES = [
         "https://www.googleapis.com/auth/userinfo.email",
+        "https://www.googleapis.com/auth/userinfo.profile",
     ]
 
     def __init__(self):
@@ -133,16 +144,20 @@ class GoogleRawLoginFlowService:
 
     @staticmethod
     def _generate_state_session_token(length=30, chars=UNICODE_ASCII_CHARACTER_SET):
-        # This is how it's implemented in the official SDK
         rand = SystemRandom()
         state = "".join(rand.choice(chars) for _ in range(length))
         return state
 
     def _get_redirect_uri(self):
-        # domain = 'settings.BASE_BACKEND_URL'
-        # api_uri = self.API_URI
+        domain = settings.BASE_BACKEND_URL
+        api_uri = str(self.API_URI)
+        print(domain)
+        print(api_uri)
+
         # redirect_uri = f"{domain}{api_uri}"
-        redirect_uri = 'http://localhost:8000/users/register_google'
+        redirect_uri = urljoin(domain, api_uri)
+        print(redirect_uri)
+        # redirect_uri = 'http://localhost:8000/users/register_google'
         return redirect_uri
 
     def get_authorization_url(self):

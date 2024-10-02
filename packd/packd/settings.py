@@ -32,6 +32,7 @@ ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 
 LOGIN_URL = "users/login"
 LOGIN_REDIRECT_URL = "packr:dashboard"
+BASE_BACKEND_URL = os.environ.get('BASE_BACKEND_URL')
 
 INSTALLED_APPS = [
     "packr",
