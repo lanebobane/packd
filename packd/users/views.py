@@ -22,19 +22,22 @@ from django.urls import reverse_lazy
 UNICODE_ASCII_CHARACTER_SET = ('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')
 
 # DJANGO BUILT-IN REGISTRATION
-def register(request):
-    if request.method == "POST":
-        form = NewUserForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            return redirect("/dashboard")
+# def register(request):
+#     if request.method == "POST":
+#         form = NewUserForm(request.POST)
+#         if form.is_valid():
+#             user = form.save()
+#             return redirect("/dashboard")
 
-    form = NewUserForm()
-    context = {"form": form}
+#     form = NewUserForm()
+#     context = {"form": form}
 
-    return render(request, "register.html", context)
+#     return render(request, "register.html", context)
 
 # GOOGLE OAUTH2 REGISTRATION/LOGIN
+
+def Login(request):
+    return render(request, "login.html")
 
 @dataclass
 class GoogleRawLoginCredentials:

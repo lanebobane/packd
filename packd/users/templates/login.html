@@ -3,18 +3,7 @@
 <main class="container">
     <div class="form">
         <h1>Login</h1>
-        <form method="POST">
-            {% csrf_token %}
-            <div class="mb-3">
-                <label class="form-label">Username</label>
-                {{form.username}}
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Password</label>
-                {{form.password}}
-            </div>
-            <button type="submit" class="btn btn-primary">Log In</button>
-        </form>
+        <a class="nav-link" href="{% url 'users:register_google' %}">Log in with Google</a>
     </div>
 </main>
 {% endblock %}
