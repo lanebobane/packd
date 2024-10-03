@@ -21,19 +21,6 @@ from django.urls import reverse_lazy
 
 UNICODE_ASCII_CHARACTER_SET = ('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')
 
-# DJANGO BUILT-IN REGISTRATION
-# def register(request):
-#     if request.method == "POST":
-#         form = NewUserForm(request.POST)
-#         if form.is_valid():
-#             user = form.save()
-#             return redirect("/dashboard")
-
-#     form = NewUserForm()
-#     context = {"form": form}
-
-#     return render(request, "register.html", context)
-
 # GOOGLE OAUTH2 REGISTRATION/LOGIN
 
 def Login(request):
@@ -53,48 +40,7 @@ class GoogleOAuthView(View):
 
         if request.GET.get('code'):
 
-            
-
-            code = request.GET.get('code')
-            error = request.GET.get('error')
-            state = request.GET.get('state')
-
-            if state != request.session["google_oauth2_state"]:
-                raise ImproperlyConfigured("The session cookies do not match!")
-            if error is not None:
-                raise Exception(error)
-
-            client_id = os.environ.get("GOOGLE_OAUTH2_CLIENT_ID")
-            client_secret = os.environ.get("GOOGLE_OAUTH2_CLIENT_SECRET")
-            redirect_uri = google_login_flow._get_redirect_uri()
-            grant_type = 'authorization_code'
-
-            post_data = {
-                "code": code,
-                "client_id": client_id, 
-                "client_secret": client_secret, 
-                "redirect_uri": redirect_uri, 
-                "grant_type": grant_type
-            }
-
-            response = requests.post('https://oauth2.googleapis.com/token', data=post_data)
-            data = response.json()
-            print('databloo')
-            print(data)
-            id_token = data['id_token']
-            decoded_token = jwt.decode(jwt=id_token, options={"verify_signature": False})
-            email = decoded_token['email']
-            email_verified = decoded_token['email_verified']
-            first_name = decoded_token['given_name']
-            family_name = decoded_token['family_name']
-
-            # if email_verified:
-            try:
-                user = User.objects.get(email=email)
-            
-            except ObjectDoesNotExist as e:
-                user = User.objects.create(username=email, email=email, first_name=first_name, last_name=family_name )
-                user.save()
+            user = google_login_flow.finalize_auth(request)
             
             login(request, user)
             return redirect("/dashboard")
@@ -105,29 +51,6 @@ class GoogleOAuthView(View):
             request.session["google_oauth2_state"] = state
 
             return redirect(authorization_url)
-
-    
-def google_raw_login_get_credentials() -> GoogleRawLoginCredentials:
-    client_id = os.environ.get("GOOGLE_OAUTH2_CLIENT_ID")
-    client_secret = os.environ.get("GOOGLE_OAUTH2_CLIENT_SECRET")
-    project_id = os.environ.get("GOOGLE_OAUTH2_PROJECT_ID")
-
-    if not client_id:
-        raise ImproperlyConfigured("GOOGLE_OAUTH2_CLIENT_ID missing in env.")
-
-    if not client_secret:
-        raise ImproperlyConfigured("GOOGLE_OAUTH2_CLIENT_SECRET missing in env.")
-
-    if not project_id:
-        raise ImproperlyConfigured("GOOGLE_OAUTH2_PROJECT_ID missing in env.")
-
-    credentials = GoogleRawLoginCredentials(
-        client_id=client_id,
-        client_secret=client_secret,
-        project_id=project_id
-    )
-
-    return credentials
 
 
 class GoogleRawLoginFlowService:
@@ -143,7 +66,30 @@ class GoogleRawLoginFlowService:
     ]
 
     def __init__(self):
-        self._credentials = google_raw_login_get_credentials()
+        self._credentials = self._google_raw_login_get_credentials()
+
+
+    def _google_raw_login_get_credentials(self) -> GoogleRawLoginCredentials:
+        client_id = os.environ.get("GOOGLE_OAUTH2_CLIENT_ID")
+        client_secret = os.environ.get("GOOGLE_OAUTH2_CLIENT_SECRET")
+        project_id = os.environ.get("GOOGLE_OAUTH2_PROJECT_ID")
+
+        if not client_id:
+            raise ImproperlyConfigured("GOOGLE_OAUTH2_CLIENT_ID missing in env.")
+
+        if not client_secret:
+            raise ImproperlyConfigured("GOOGLE_OAUTH2_CLIENT_SECRET missing in env.")
+
+        if not project_id:
+            raise ImproperlyConfigured("GOOGLE_OAUTH2_PROJECT_ID missing in env.")
+
+        credentials = GoogleRawLoginCredentials(
+            client_id=client_id,
+            client_secret=client_secret,
+            project_id=project_id
+        )
+
+        return credentials
 
     @staticmethod
     def _generate_state_session_token(length=30, chars=UNICODE_ASCII_CHARACTER_SET):
@@ -154,13 +100,7 @@ class GoogleRawLoginFlowService:
     def _get_redirect_uri(self):
         domain = settings.BASE_BACKEND_URL
         api_uri = str(self.API_URI)
-        print(domain)
-        print(api_uri)
-
-        # redirect_uri = f"{domain}{api_uri}"
         redirect_uri = urljoin(domain, api_uri)
-        print(redirect_uri)
-        # redirect_uri = 'http://localhost:8000/users/register_google'
         return redirect_uri
 
     def get_authorization_url(self):
@@ -183,3 +123,48 @@ class GoogleRawLoginFlowService:
         authorization_url = f"{self.GOOGLE_AUTH_URL}?{query_params}"
 
         return authorization_url, state
+
+    def finalize_auth(self, request) -> User:
+        code = request.GET.get('code')
+        error = request.GET.get('error')
+        state = request.GET.get('state')
+
+        if state != request.session["google_oauth2_state"]:
+            raise ImproperlyConfigured("The session cookies do not match!")
+        if error is not None:
+            raise Exception(error)
+
+        client_id = os.environ.get("GOOGLE_OAUTH2_CLIENT_ID")
+        client_secret = os.environ.get("GOOGLE_OAUTH2_CLIENT_SECRET")
+        redirect_uri = self._get_redirect_uri()
+        grant_type = 'authorization_code'
+
+        post_data = {
+            "code": code,
+            "client_id": client_id, 
+            "client_secret": client_secret, 
+            "redirect_uri": redirect_uri, 
+            "grant_type": grant_type
+        }
+
+        try:
+            response = requests.post('https://oauth2.googleapis.com/token', data=post_data)
+            data = response.json()
+            id_token = data['id_token']
+        except Exception as e:
+            return redirect("/dashboard")
+        decoded_token = jwt.decode(jwt=id_token, options={"verify_signature": False})
+        email = decoded_token['email']
+        # TODO: How is this best used?  
+        # email_verified = decoded_token['email_verified']
+        first_name = decoded_token['given_name']
+        family_name = decoded_token['family_name']
+
+        try:
+            user = User.objects.get(email=email)
+        
+        except ObjectDoesNotExist as e:
+            user = User.objects.create(username=email, email=email, first_name=first_name, last_name=family_name )
+            user.save()
+
+        return user
