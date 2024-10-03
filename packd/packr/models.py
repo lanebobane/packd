@@ -40,6 +40,8 @@ class Pack(models.Model):
     def volume_remaining(self):
         vol_remaining = self.bag.volume() if self.bag else 0
         for i in self.items.all():
+            if self.bag.id == i.id:
+                continue
             vol_remaining -= i.volume()
         return vol_remaining
 
