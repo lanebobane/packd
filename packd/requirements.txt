@@ -4,3 +4,5 @@ platformdirs==2.5.4
 Django==4.2.3
 psycopg2-binary==2.9.6
 gunicorn==21.2.0
+requests==2.32.3
+PyJWT==2.9.0

@@ -2,19 +2,16 @@
 {% block content %}
 <main class="container">
     <div class="form">
-        <h1>Login</h1>
-        <form method="POST">
-            {% csrf_token %}
-            <div class="mb-3">
-                <label class="form-label">Username</label>
-                {{form.username}}
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Password</label>
-                {{form.password}}
-            </div>
-            <button type="submit" class="btn btn-primary">Log In</button>
-        </form>
+        <h1>Login with:</h1>
+        
+            <a class="nav-link" href="{% url 'users:register_google' %}">
+                <div border-style="solid">
+                    <img width=20 src="https://id-frontend.prod-east.frontend.public.atl-paas.net/assets/google-logo.5867462c.svg">
+                    Google
+                </div>
+            </a>
+        
+        
     </div>
 </main>
 {% endblock %}
