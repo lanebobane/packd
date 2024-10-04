@@ -143,3 +143,27 @@ class ItemTest(TestCase):
     	item2 = self.create_item(traveler)
     	pack = self.create_pack(traveler, "test_pack_volume_remaining", bag, [item1, item2])
     	self. assertTrue(pack.pack_weight() == 30)
+
+    def test_share_pack(self):
+        traveler = self.create_traveler_a()
+        traveler.save()
+        bag = self.create_bag(traveler)
+        item1 = self.create_item(traveler)
+        item2 = self.create_item(traveler)
+        pack = self.create_pack(traveler, "test_pack_creation", bag, [item1, item2])
+        self.assertTrue(isinstance(pack, Pack))
+        self.assertEqual(pack.__str__(), "test_pack_creation")
+        self.assertTrue(pack.traveler.id == traveler.id)
+        self.assertTrue(len(pack.items.all()) == 2)
+
+        shared_pack = pack.share_pack()
+
+        self.assertTrue(isinstance(shared_pack, Pack))
+        self.assertEqual(shared_pack.__str__(), "test_pack_creation")
+        self.assertTrue(shared_pack.traveler == None)
+        self.assertTrue(len(shared_pack.items.all()) == 2)
+
+        for item in shared_pack.items.all():
+            self.assertTrue(item.traveler == None)
+
+
