@@ -57,7 +57,9 @@ def add_pack(request, **kwargs):
     form.fields["bag"].queryset = Item.objects.filter(
         is_bag=True, traveler=request.user
     )
-    form.fields["items"].queryset = Item.objects.filter(traveler=request.user)
+    form.fields["items"].queryset = Item.objects.filter( 
+        is_bag=False, traveler=request.user
+    )
 
     if request.method == "POST" and form.is_valid():
         pack = form.save()
