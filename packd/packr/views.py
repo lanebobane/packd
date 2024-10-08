@@ -82,6 +82,8 @@ def share_pack(request, pk):
 
 
 def adopt_pack(request, pk):
+    if request.user.id is None: 
+        return redirect('/users/login')
     if request.method == "POST":
         pack = Pack.objects.get(pk=pk)
         adopted_pack = pack.adopt_pack(request.user.id)
